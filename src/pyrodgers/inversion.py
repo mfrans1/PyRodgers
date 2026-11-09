@@ -7,8 +7,10 @@ class Inversion:
         self.wavelength = wavelength
         self.weighting_functions = np.asarray(weighting_functions)
 
-    def basis_functions(self, basis_type="polynomial", n_basis=10):
+    def basis_functions(self, basis_type="polynomial"):
 
+        n_basis = len(self.weighting_functions)
+        
         z = self.altitude / self.altitude[-1]
 
         if basis_type == "polynomial":
@@ -43,4 +45,9 @@ class Inversion:
 
         self.C = C
 
-        
+
+    def reconstruct_signal(self, L):
+        signal_recon = self.basis.T @ np.linalg.inv(self.C) @ L
+
+        return signal_recon
+
