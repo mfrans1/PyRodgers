@@ -54,4 +54,35 @@ Rodgers (2000) doesn't have a lot of active sensor comments to share, perhaps be
 
 ## 1.3 Simple Solutions to Inverse Problems
 
+This is the case where the influence of clouds and other absorbers can be safely ignored, such that the radiative transfer equation decomposes to:
 
+$$
+L(\nu) = \int^{\infty}_{0}B[\nu, T(z)]\frac{d\tau(\nu,z)}{dz}dz
+$$
+
+Where $B[\nu, T(z)]$ is the Planck function, calculating radiance as a function of temperature. For the sake of simplicity in this example, ground emission is zero, its just atmospheric contributions. Secondly, consider taking measurements at a close spectral interval such that the wavenumber variability of radiance can be ignored (ie, we just fix the wavenumber). This reduces the problem further to:
+
+$$
+L(\nu_i) = \int^{\infty}_{0}B[\bar{\nu}, T(z)]K_i(z)dz
+$$
+
+where $K_i(z) = \frac{d\tau(\bar{\nu}, z)}{dz}$. The equation is now linear in $B[T(z)]$ which is our unknown we'd want to recover. Fundamentally, we can conclude that if $B[T(z)]$ is found, we can recover the profile of temperature. 
+
+Solving the equation above is clearly going to be a challenge. Not least of which is the fact that there are a finite number of measurements to solve a continuous unknown (the problem is ill-posed). We therefore deconstruct the continuous $B[\bar{\nu}, T(z)]$ to a basis, using polynomial, sin, cos, whatever you'd like (although polynomial tends to be the best suited).
+
+$$
+B(\bar{\nu}, T(z)) = \sum_{j=1}^{m}w_jW_j(z)
+$$
+
+Substituting back into the equation of interest we get:
+$$
+L_i = \sum_{j=1}^{m}w_j \int_{0}^{\infty}W_j(z)K_i(z)dz = \sum_{j=1}^{m}C_{ij}w_j
+$$
+
+Defining the matrix C as $C_{ij}=\int_{0}^{\infty}W_j(z)K_i(z)dz$, which can be easily calculated. It thus follows that we have a set of m equations with m unkowns, the problem can be solved. It then also follows that:
+
+$$
+B(\bar{\nu}, T(z)) = \sum_{i,j}W_j(z)C^{-1}_{ji}L_i
+$$
+
+Unfortunately, this problem set-up tends to be terribly ill-conditioned in many (most) practical applications. Consequently any error or uncertainty will be monumentally amplified and the solution will be meaningless. Perhaps thankfully so, otherwise the rest of the book would be unneeded. 

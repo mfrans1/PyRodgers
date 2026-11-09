@@ -43,7 +43,7 @@ class ForwardModel:
 
         return temperature
 
-    def simulate_toa(self, weighting_functions):
+    def simulate_radiance(self, weighting_functions):
         """Integrate the radiance profile against each weighting function."""
 
         B = self.planck_function()
