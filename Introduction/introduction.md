@@ -54,6 +54,8 @@ Rodgers (2000) doesn't have a lot of active sensor comments to share, perhaps be
 
 ## 1.3 Simple Solutions to Inverse Problems
 
+We can find simple cases for inverse theory, like recovering a simple profile of temperature (shown below).
+![](./data/true_profile.png)
 This is the case where the influence of clouds and other absorbers can be safely ignored, such that the radiative transfer equation decomposes to:
 
 $$
@@ -66,7 +68,12 @@ $$
 L(\nu_i) = \int^{\infty}_{0}B[\bar{\nu}, T(z)]K_i(z)dz
 $$
 
-where $K_i(z) = \frac{d\tau(\bar{\nu}, z)}{dz}$. The equation is now linear in $B[T(z)]$ which is our unknown we'd want to recover. Fundamentally, we can conclude that if $B[T(z)]$ is found, we can recover the profile of temperature. 
+where $K_i(z) = \frac{d\tau(\bar{\nu}, z)}{dz}$ and is known as the weighting function(s). Usually the weighting functions will be informed by the sensor, RTM, prior knowledge, observations etc. For now we just make them up. We create a set of them centered at different heights to essentially construct a measurement space, like the one illustrated here:
+
+![](./data/weighting_functions.png)
+
+
+The equation is now linear in $B[T(z)]$ which is our unknown we'd want to recover. Fundamentally, we can conclude that if $B[T(z)]$ is found, we can recover the profile of temperature. 
 
 Solving the equation above is clearly going to be a challenge. Not least of which is the fact that there are a finite number of measurements to solve a continuous unknown (the problem is ill-posed). We therefore deconstruct the continuous $B[\bar{\nu}, T(z)]$ to a basis, using polynomial, sin, cos, whatever you'd like (although polynomial tends to be the best suited).
 
@@ -84,5 +91,9 @@ Defining the matrix C as $C_{ij}=\int_{0}^{\infty}W_j(z)K_i(z)dz$, which can be 
 $$
 B(\bar{\nu}, T(z)) = \sum_{i,j}W_j(z)C^{-1}_{ji}L_i
 $$
+
+We can use this to recover our temperature profile:
+
+![](./data/reconstructed_profile.png)
 
 Unfortunately, this problem set-up tends to be terribly ill-conditioned in many (most) practical applications. Consequently any error or uncertainty will be monumentally amplified and the solution will be meaningless. Perhaps thankfully so, otherwise the rest of the book would be unneeded. 
