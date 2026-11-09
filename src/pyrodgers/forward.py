@@ -25,6 +25,24 @@ class ForwardModel:
 
         return spectral_radiance
 
+    def inverse_planck_function(self, spectral_radiance):
+        """Calculate temperature from spectral radiance."""
+
+        exponent = (
+            2 * h * c**2
+            / (self.wavelength**5 * spectral_radiance)
+        )
+
+        temperature = (
+            h * c
+            / (
+                self.wavelength * k
+                * np.log1p(exponent)
+            )
+        )
+
+        return temperature
+
     def simulate_toa(self, weighting_functions):
         """Integrate the radiance profile against each weighting function."""
 
