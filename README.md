@@ -7,10 +7,10 @@ This repository is the collection of notes on the chapters and methods outlined 
 ## Table of Contents:
 
 1. [Introduction](./Introduction/)
-2. [Information Aspects](./information_aspects/)
-3. [Error Analysis and Characterization](./error_analysis/)
-4. [Optimal Linear Inverse Methods](./linear_inverse)
-5. [Optimal Non-Linear Inverse Methods](./non_linear_inerse/)
+2. [Information Aspects](./information_aspects/information_aspects.md)
+3. [Error Analysis and Characterization](./not_implemented/not_implemented.md)
+4. [Optimal Linear Inverse Methods](./not_implemented/not_implemented.md)
+5. [Optimal Non-Linear Inverse Methods](./not_implemented/not_implemented.md)
 6. [Approximations, Short Cuts and Ad-Hoc Methods](./not_implemented/not_implemented.md)
 7. [The Kalman Filter](./not_implemented/not_implemented.md)
 8. [Global Data Assimilation](./not_implemented/not_implemneted.md)
