@@ -177,3 +177,16 @@ $$
 $$
 
 Constant surfaces in the form of ellipsoids in measurements space, with the principal axes corresponding to the eigenvectors of $\mathbf{S_y}$, and the lengths of these principal axes proportional to $\sqrt\lambda_i$. These ellipsoids can be thought of as the multivariate equivalent of error bars. 
+
+### The Bayesian approach to the inverse problem
+
+So we've discussed that the measurement vector, with inherent uncertainty, can be described using probability distribution functions. Expectedly, the state can be described with probability distirbution functions as well. This transforms the inverse problem into a problem of relating the distribution functions of the measurement with that of the state. Recall from the introduction:
+
+$$
+\vec{y} = \mathbf{F}\vec{x} + \vec{\epsilon}
+$$
+
+The measurement error $\epsilon$ is known statistically, so that even though the forward model is deterministic, a point in state space maps into a region in measurement space determined by the probability density function of $\epsilon$. Conversely, if the $\vec{y}$ measurment vector is given, it could result of a mapping from anywhere in state space described by some probability distribution function, rather than from an exact single point. 
+
+Furthermore, we might also have some useful prior information about the state (e.g., a climatology) that can be described using a probability distribution function, which can be used to constrain the solution as well. Such prior knowledge can be thought of as a *virtual measurement*. 
+
