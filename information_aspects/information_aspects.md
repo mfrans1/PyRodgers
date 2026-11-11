@@ -74,3 +74,33 @@ Well-determined problems have unique solutions, found by solving a set of $p\tim
 
 ### Identifying the null space and the row space
 
+The row space of a given weighting function matrix $\mathbf{K}$ can be found by finding a basis, or coordinate system, for state space of orthogonal sets of vectors. This makes it a bit tricky, as there are infinite ways of doing this. And any rotation of a valid orthogonal set is another valid basis. We can take the singular value decomposition to help us out. 
+
+$$
+\mathbf{K} = \mathbf{U}\mathbf{\Lambda}\mathbf{V}^T
+$$
+
+Where $\mathbf{U} (m\times p)$ and $\mathbf{V} (n \times p)$ are matrixes of its left and right singular vectors and $\mathbf{\Lambda}$ is a diagonal matrix of singular values of size $(p \times p)$; where $p$ is the rank of the matrix $\mathbf{K}$. 
+
+Recall our synthetic weighting function matrix $\mathbf{K}$ from the introduction. The altitude dimension was set at $1000$, and there are $14$ measurement points, i.e., $m \times n = 14 \times 1000$, the size of our matrix $\mathbf{K}$
+![](./data/weighting_functions.png)
+We can take the singular valude decomposition of this matrix and investigate the singular vectors. Below are the first 8 singular vectors, with the singular values printed as titles. 
+![](./data/weighting_function_svd.png)
+
+The $p$ columns of $\mathbf{V}$ for the desired orthogonal basis for the row space and the columns of $\mathbf{U}$ for a corresponding basis in measurement space. 
+
+We can inset the singular value decomposition into our forward model and multply by $\mathbf{U}^T$:
+
+$$
+\vec{y} = \mathbf{K}\vec{x} \\
+\vec{y} = \mathbf{U}\mathbf{\Lambda}\mathbf{V}^T \vec{x} \\
+\mathbf{U}^T\vec{y} = \mathbf{\Lambda}\mathbf{V}^T\vec{x}
+$$
+
+Then defining $\vec{y}' = \mathbf{U}^T\vec{y}$ and $\vec{x}' = \mathbf{V}^T\vec{x}$. We can obtain
+
+$$
+\vec{y}' = \mathbf{\Lambda}\vec{x}'
+$$
+
+indicating that the $p$ transformed measurements $\vec{y}'$ in column space are each proportional to a component of the transformed state space $\vec{x}'$ in p-dimensional row space. The matrix $\mathbf{V}$ forms a natural basis for row space, closely related to the $\mathbf{U}$ matrix basis for column space. 
