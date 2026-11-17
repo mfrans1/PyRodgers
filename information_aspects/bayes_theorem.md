@@ -52,3 +52,14 @@ $$
 P(\vec{x}|\vec{y}) = \frac{P(\vec{y}|\vec{x})P(\vec{x})}{P(\vec{y})}
 $$
 
+This equation is what we need in order to update the prior knowledge $P(\vec{x})$ of the state with the measurement. $P(\vec{y}|\vec{x})$ describes the knowledge of the measurement that would be obtained if the state were known as $\vec{x}$. To write it down explicity requires only the forward model and statistical description of the measurement error. The only remaining quantity is thus the denominator $P(\vec{y})$. We can find this through integration across the entire domain as discussed, but in practice it tends to only be a normalizing factor and can actually often be discarded. We're physicists not mathematicians after all...
+
+## The Conceptual Approach to Inverse Problems
+
+- Before we make a measurement we have prior knowledge (*a priori*) expressed as our prior probability density function. 
+- The measurement process is expressed as a forward model which maps the state space into measurement space. 
+- Bayes' Theorem provides a formalism to invert this mapping and calculate the posterior probalitity distribution function by updating the prior pdf with the measurement pdf. 
+
+The forward model is never explicity inverted in this approach, but then an explicit state is not produced as an "answer". It provides us with some intuition about how the measurement improves knowledge about the state, but to obtain an explicit retrieval we must choose one state from the ensemble described by the posteriod probability distribution function. This can be done through the expected value of the posterior, most probable state, together with some measure of the width of the posterior distribution to give an accuracy of the retrieval.
+
+**Further work is needed, resulting in expressions mathematically equivalent to inverting the forward model**
