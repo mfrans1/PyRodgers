@@ -21,3 +21,34 @@ It might seem a bit odd to use the same symbol P for all of these different func
 The figure above illustrates the concepts outlined. $P(\vec{x})$ and $P(\vec{y})$ are detailed as probability density functions with respect to the state or measurement vectors respectively. They also define the shared joint distribution illustrated as the heatmap. The contour overlaid on the heatmap represents $(P(\vec{y}\mid\vec{x}) = P(\vec{x},\vec{y})/P(\vec{x}))$, illustrating the conditional probability density of the measurement vector given the state vector.
 
 ## More Definitions
+
+We can find the probability of one variable by integrating across the domain of the other. 
+
+$$
+P(x) = \int _{-\infty}^{\infty}P(x,y)dy
+$$
+
+or 
+
+$$
+P(y) = \int _{-\infty}^{\infty}P(x,y)dx
+$$
+
+The conditional distribution $P(y|x)$ is proportional to the values of $P(y,x)$ as a function of $y$ for a given value of $x$. The constant of proportionality is such that $\int P(y|x)dy=1$, so $P(y,x)$ ought to be divided by the integral along the line.
+
+$$
+P(y|x) = \frac{P(x,y)}{\int P(x,y)dy}
+$$
+
+Thus, as we know $\int P(x,y)dy=P(x)$, we can thus find:
+
+$$
+P(y|x) = \frac{P(x,y)}{P(x)}
+$$
+
+And inversely, the same is true for $P(x|y)=\frac{P(x,y)}{P(y)}$. From the two equations, we can eliminate the joint distributions to derive Bayes' theorem.
+
+$$
+P(\vec{x}|\vec{y}) = \frac{P(\vec{y}|\vec{x})P(\vec{x})}{P(\vec{y})}
+$$
+
