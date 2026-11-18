@@ -265,3 +265,7 @@ $$
 Remember that the Bayesian solution to the inverse problem is not $\hat{\vec{x}}$, but a Gaussian distribution with the expected value as $\hat{\vec{x}}$ and with covariance $\mathbf{\hat{S}}$. 
 
 Note that $\hat{\vec{x}}$ is a linear function of the prior expected value and the measurement, as might be expected from the linear problem, and that the *inverse* covariance matrix $\mathbf{\hat{S}}^{-1}$ is a linear function of the inverse prior covariance matrix and the inverse measurement covariance matrix.  
+
+![](./data/bayesian_solution.png)
+
+The figure above illustrates the posterior solution for the state and measurement space using the Bayesian solution discussed in this section. 
