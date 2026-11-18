@@ -190,3 +190,24 @@ The measurement error $\epsilon$ is known statistically, so that even though the
 
 Furthermore, we might also have some useful prior information about the state (e.g., a climatology) that can be described using a probability distribution function, which can be used to constrain the solution as well. Such prior knowledge can be thought of as a *virtual measurement*. 
 
+### The Linear Problem wit Gaussian statistics
+
+The multivariate Gaussian distribution for a random vector $\vec{x}$ is obtained from $P(\vec{y}) = \frac{1}{(2n)^{n/2}|\mathbf{S_y}|^{1/2}}\exp \left[ -\frac{1}{2} (\vec{y}-\vec{\bar{y}})^T\mathbf{S_y}^{-1}(\vec{y}-\vec{\bar{y}})\right]$. The maximum probability value for the vector $\vec{x}$ is trivially equal to the expected value of the distribution $\bar{\vec{x}}$.
+
+Recall our linear problem, where the forward model is a linear mapping, using the weighting function matrix as before. 
+
+$$
+\vec{y} = \mathbf{F}(\vec{x}) + \epsilon = \mathbf{K}\vec{x} + \epsilon
+$$
+
+We can express $P(\vec{y}|\vec{x})$ as:
+
+$$
+-2lnP(\vec{y}|\vec{x}) = (\vec{y}-\mathbf{K}\vec{x})^T\mathbf{S_e}^{-1}(\vec{y} - \mathbf{k}\vec{x}) + c_1
+$$
+
+Where $c_1$ is independent of $\vec{x}$ and $\mathbf{S_e}$ is the measurement error covariance. Less realistic, but convenient, is to describe the prior knowledge of $\vec{x}$ using a guassian distribution as well:
+
+$$
+
+$$
