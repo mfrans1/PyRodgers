@@ -203,11 +203,65 @@ $$
 We can express $P(\vec{y}|\vec{x})$ as:
 
 $$
--2lnP(\vec{y}|\vec{x}) = (\vec{y}-\mathbf{K}\vec{x})^T\mathbf{S_e}^{-1}(\vec{y} - \mathbf{k}\vec{x}) + c_1
+-2\ln P(\vec{y}|\vec{x}) = (\vec{y}-\mathbf{K}\vec{x})^T\mathbf{S_e}^{-1}(\vec{y} - \mathbf{K}\vec{x}) + c_1
 $$
 
 Where $c_1$ is independent of $\vec{x}$ and $\mathbf{S_e}$ is the measurement error covariance. Less realistic, but convenient, is to describe the prior knowledge of $\vec{x}$ using a guassian distribution as well:
 
 $$
+-2\ln P(\vec{x}) = (\vec{x} - \vec{x}_a)^T\mathbf{S_a}^{-1}(\vec{x} - \vec{x}_a) + c_2
+$$
+
+With $\vec{x}_a$ the a priori state, and $\mathbf{S_a}$ the associated covariance matrix: $\mathbf{S_a} = \Epsilon((\vec{x}-\vec{x}_a)(\vec{x}-\vec{x}_a)^T)$
+
+We can use this information thus to find $P(\vec{x}|\vec{y})$ using the relation $P(\vec{x}|\vec{y})=\frac{P(\vec{y}|\vec{x})P(\vec{x})}{P(\vec{y})}$. We can reduce $P(\vec{y})$ to a normalizing factor, and in true physicist fashion we just toss it into the bin. 
 
 $$
+-2\ln P(\vec{x}|\vec{y}) = P(\vec{y}|\vec{x})P(\vec{x}) =  (\vec{y}-\mathbf{K}\vec{x})^T\mathbf{S_e}^{-1}(\vec{y} - \mathbf{K}\vec{x}) + (\vec{x} - \vec{x}_a)^T\mathbf{S_a}^{-1}(\vec{x} - \vec{x}_a) + c_3
+$$
+
+Where, as before $c_3$ is some constant that is independent of $\vec{x}$. THis is a quadratic form in $\vec{x}$, so it must be possible to write it as:
+
+$$
+-2\ln P(\vec{x}|\vec{y}) = (\vec{x}-\hat{\vec{x}})^T\mathbf{\hat{S}}^{-1}(\vec{x}-\hat{\vec{x}}) + c_4
+$$
+
+i.e., the posterior probability distribution is also a Gaussian distirbution with expected value $\hat{\vec{x}}$ and covariance $\mathbf{\hat{S}}$. By equating the like terms of the past several equations, we can find:
+
+$$
+\vec{x}^T\mathbf{K}^T\mathbf{S_e}^{-1}\mathbf{K}\vec{x}+\vec{x}^T\mathbf{S_a}^{-1}\vec{x} = \vec{x}^T\mathbf{\hat{S}}^{-1}\vec{x}
+$$
+
+Gives
+
+$$
+\mathbf{\hat{S}}^{-1} = \mathbf{K}^T\mathbf{S_e}^{-1}\mathbf{K} + \mathbf{S_a}^{-1}
+$$
+
+Likewise, equating the terms linear in $\vec{x}^T$ gives
+
+$$
+-(\mathbf{K}\vec{x})^T\mathbf{S_e}^{-1}(\vec{y}) + (\vec{x})^T\mathbf{S_a}^{-1}(-\vec{x}_a) = \vec{x}^T\mathbf{\hat{S}}^{-1}(-\hat{\vec{x}})
+$$
+
+Cancelling out the $\vec{x}^T$ terms and substituting the $\mathbf{\hat{S}}^{-1} = \mathbf{K}^T\mathbf{S_e}^{-1}\mathbf{K} + \mathbf{S_a}^{-1}$ definition gives:
+
+$$
+\mathbf{K}^T\mathbf{S_e}^{-1}\vec{y}+\mathbf{S_a}^{-1}\vec{x}_a=(\mathbf{K}^T\mathbf{S_e}^{-1}\mathbf{K}+\mathbf{S_a}^{-1})\hat{\vec{x}}
+$$
+
+Hence,
+
+$$
+\hat{\vec{x}} = \vec{x}_a + (\mathbf{K}^T\mathbf{S_e}^{-1}\mathbf{K} + \mathbf{S_a}^{-1})^{-1}\mathbf{K}^T\mathbf{S_e}^{-1}(\vec{y} - \mathbf{K}\vec{x_a})
+$$
+
+We could find the constant terms too but they wouldn't add very much information. All constants must be of the form $\ln[(2\pi)^n|\mathbf{S}|]$, in order to correctly normalize the probability distribution functions. An alternative form of the $\hat{\vec{x}}$ expression can be found:
+
+$$
+\hat{\vec{x}} = \vec{x}_a+\mathbf{S_a}\mathbf{K}^T(\mathbf{KS_aK}^T+\mathbf{S_e})^{-1}(\vec{y} - \mathbf{K}\vec{x}_a)
+$$
+
+Remember that the Bayesian solution to the inverse problem is not $\hat{\vec{x}}$, but a Gaussian distribution with the expected value as $\hat{\vec{x}}$ and with covariance $\mathbf{\hat{S}}$. 
+
+Note that $\hat{\vec{x}}$ is a linear function of the prior expected value and the measurement, as might be expected from the linear problem, and that the *inverse* covariance matrix $\mathbf{\hat{S}}^{-1}$ is a linear function of the inverse prior covariance matrix and the inverse measurement covariance matrix.  
